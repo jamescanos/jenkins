@@ -1,6 +1,6 @@
 services:
   jenkins:
-    container_name: jenkins
+    container_name: jenkins-app
     image: jenkins-with-docker
     user: root
     ports:
@@ -8,8 +8,6 @@ services:
       - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /usr/bin/docker:/usr/bin/docker
-
+      - /var/run/docker.sock:/var/run/docker.sock   # Sólo montamos el socket
 volumes:
   jenkins_home:
