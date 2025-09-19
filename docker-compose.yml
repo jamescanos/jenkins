@@ -1,13 +1,15 @@
 services:
   jenkins:
-    image: jenkins-with-docker
     container_name: jenkins
+    image: jenkins-with-docker
     user: root
     ports:
       - "8082:8080"
       - "50000:50000"
     volumes:
       - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock  # <--- este SÍ es necesario
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+
 volumes:
   jenkins_home:

@@ -14,7 +14,15 @@ pipeline {
         }
         stage('Desplegar') {
             steps {
-                sh 'docker compose up -d'
+                sh '''
+                # Si existe un contenedor llamado jenkins, lo elimina antes de crear uno nuevo
+                if [ "$(docker ps -aq -f name=jenkins)" ]; then
+                    echo "Eliminando contenedor existente..."
+                    docker rm -f jenkins || true
+                fi
+
+                docker compose up -d
+                '''
             }
         }
     }
